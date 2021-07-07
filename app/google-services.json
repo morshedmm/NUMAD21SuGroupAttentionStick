@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "560298309198",
+    "project_id": "stick-it-group-attention",
+    "storage_bucket": "stick-it-group-attention.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560298309198:android:25e455e46fe14f09e6751f",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.numad21sugroupattentionstick"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "560298309198-fmmgdnbth9m3alcms6oib51eabgb93qb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSDso35o6vrBiQCUfo82RlusAQIXYaDWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "560298309198-fmmgdnbth9m3alcms6oib51eabgb93qb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
