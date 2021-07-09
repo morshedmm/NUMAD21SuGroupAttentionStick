@@ -107,13 +107,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         //User myUser;
         myUser = new User(curName, "0", "");
 
-            /*
-            Task t3 = mDatabase.child("users").child(myUser.username).setValue(myUser);
 
-            if (!t3.isSuccessful()) {
-                Toast.makeText(getApplicationContext(), "Unable to add!", Toast.LENGTH_SHORT).show();
-            }
-            */
         //}
 
     }
@@ -135,7 +129,8 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         //User receiver = new User(curName, "0", "");
 
         //RealtimeDatabaseActivity.this.onAddScore(mDatabase, player.isChecked() ? "user1" : "user2",imageNum);
-        RealtimeDatabaseActivity.this.onAddScore(mDatabase, curName,imageNum);
+        RealtimeDatabaseActivity.this.onAddScore(mDatabase, curName,imageNum,myUser.username);
+        RealtimeDatabaseActivity.this.onAddScore(mDatabase, myUser.username+"sent",imageNum,curName);
     }
 
     // Reset USERS Button
@@ -150,6 +145,12 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         user = new User("user2", "","");
         Task t2 = mDatabase.child("users").child(user.username).setValue(user);
 
+        user = new User("user1sent", "","");
+        Task t3 = mDatabase.child("users").child(user.username).setValue(user);
+
+        //user = new User("user2", "0");
+        user = new User("user2sent", "","");
+        Task t4 = mDatabase.child("users").child(user.username).setValue(user);
 
         if(!t1.isSuccessful() && !t2.isSuccessful()){
             Toast.makeText(getApplicationContext(),"Unable to reset players!",Toast.LENGTH_SHORT).show();
@@ -210,7 +211,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
      * @param postRef
      * @param user
      */
-    private void onAddScore(DatabaseReference postRef, String user, String imageNum) {
+    private void onAddScore(DatabaseReference postRef, String user, String imageNum, String senderName) {
         postRef
                 .child("users")
                 .child(user)
@@ -225,7 +226,8 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
 
                         //user.score = String.valueOf(Integer.valueOf(user.score) + 5);
                         user.score = user.score + imageNum + " ";
-                        user.senders = user.senders + myUser.username + " ";
+                        //user.senders = user.senders + myUser.username + " ";
+                        user.senders = user.senders + senderName + " ";
 
                         mutableData.setValue(user);
                         int i =0 ;
