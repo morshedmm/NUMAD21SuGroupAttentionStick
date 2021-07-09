@@ -134,6 +134,28 @@
             android:onClick="setUserName"
             android:layout_toEndOf="@+id/usernamelabel_id"
             android:text="LogIn" />
+
+        <Button
+            android:id="@+id/add_button1_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/loginbutton_id"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="20dp"
+            android:text="image1"
+            android:onClick="addImage1"/>
+
+        <Button
+            android:id="@+id/add_button2_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/loginbutton_id"
+            android:layout_marginStart="67dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/add_button1_id"
+            android:text="image2"
+            android:onClick="addImage2"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -167,7 +189,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/add5"
             android:text="@string/add5"
-            android:onClick="addFivePoints"/>
+            />
 
         <Button
             android:id="@+id/reset"

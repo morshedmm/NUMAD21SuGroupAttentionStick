@@ -118,9 +118,17 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
 
     }
 
+    public void addImage1(View view) {
+        addFivePoints(view, "1");
+    }
+
+    public void addImage2(View view) {
+        addFivePoints(view, "2");
+    }
+
     // Add 5 points Button
-    public void addFivePoints(View view) {
-        RealtimeDatabaseActivity.this.onAddScore(mDatabase, player.isChecked() ? "user1" : "user2");
+    public void addFivePoints(View view, String imageNum) {
+        RealtimeDatabaseActivity.this.onAddScore(mDatabase, player.isChecked() ? "user1" : "user2",imageNum);
     }
 
     // Reset USERS Button
@@ -195,7 +203,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
      * @param postRef
      * @param user
      */
-    private void onAddScore(DatabaseReference postRef, String user) {
+    private void onAddScore(DatabaseReference postRef, String user, String imageNum) {
         postRef
                 .child("users")
                 .child(user)
@@ -209,7 +217,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
                         }
 
                         //user.score = String.valueOf(Integer.valueOf(user.score) + 5);
-                        user.score = user.score + "5 ";
+                        user.score = user.score + imageNum + " ";
                         user.senders = user.senders + myUser.username + " ";
 
                         mutableData.setValue(user);
