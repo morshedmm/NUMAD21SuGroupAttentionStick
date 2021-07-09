@@ -188,29 +188,7 @@
 
         <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:checked="true"
-                android:text="Player 1"
-                android:id="@+id/player1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <RadioButton
-                android:text="Player 2"
-                android:id="@+id/player2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </RadioGroup>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/add5"
-            android:text="@string/add5"
-            />
+            android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/reset"
