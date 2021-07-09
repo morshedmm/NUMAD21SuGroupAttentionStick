@@ -36,7 +36,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     private RadioButton player;
 
     // Adding variable to hold my user name
-    //private User myUser;
+    private User myUser;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -101,13 +101,20 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         EditText givenName = (EditText) findViewById(R.id.myusername_id);
         String curName = givenName.getText().toString();
         Log.i("usernamevalue", curName);
-        User myUser;
-        myUser = new User(curName, "0");
-        Task t3 = mDatabase.child("users").child(myUser.username).setValue(myUser);
 
-        if(!t3.isSuccessful()){
-            Toast.makeText(getApplicationContext(),"Unable to add!",Toast.LENGTH_SHORT).show();
-        }
+
+
+        //User myUser;
+        myUser = new User(curName, "0", "");
+
+            /*
+            Task t3 = mDatabase.child("users").child(myUser.username).setValue(myUser);
+
+            if (!t3.isSuccessful()) {
+                Toast.makeText(getApplicationContext(), "Unable to add!", Toast.LENGTH_SHORT).show();
+            }
+            */
+        //}
 
     }
 
@@ -120,10 +127,12 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     public void resetUsers(View view) {
 
         User user;
-        user = new User("user1", "0");
+        //user = new User("user1", "0");
+        user = new User("user1", "","");
         Task t1 = mDatabase.child("users").child(user.username).setValue(user);
 
-        user = new User("user2", "0");
+        //user = new User("user2", "0");
+        user = new User("user2", "","");
         Task t2 = mDatabase.child("users").child(user.username).setValue(user);
 
 
@@ -162,6 +171,9 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
                 Log.d(TAG, "Value is: " + value);
                 TextView tv = (TextView) findViewById(R.id.dataUpdateTextView);
                 tv.setText(value);
+                //
+                dataSnapshot.getKey().equals("users");
+                //
             }
 
             @Override
@@ -196,7 +208,9 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
                             return Transaction.success(mutableData);
                         }
 
-                        user.score = String.valueOf(Integer.valueOf(user.score) + 5);
+                        //user.score = String.valueOf(Integer.valueOf(user.score) + 5);
+                        user.score = user.score + "5 ";
+                        user.senders = user.senders + myUser.username + " ";
 
                         mutableData.setValue(user);
                         int i =0 ;
