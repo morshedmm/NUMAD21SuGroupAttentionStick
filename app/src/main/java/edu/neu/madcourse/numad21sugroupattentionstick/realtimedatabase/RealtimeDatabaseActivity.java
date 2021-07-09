@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,9 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     private TextView user2;
     private TextView score_user2;
     private RadioButton player;
+
+    // Adding variable to hold my user name
+    //private User myUser;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -86,6 +90,27 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         );
     }
 
+    public void setUserName(View view) {
+
+        /*
+        String curName = findViewById(R.id.myusername_id).toString();
+        User myUser = new User(curName, "0");
+        Task t3 = mDatabase.child("users").child(myUser.username).setValue(myUser);
+        */
+
+        EditText givenName = (EditText) findViewById(R.id.myusername_id);
+        String curName = givenName.getText().toString();
+        Log.i("usernamevalue", curName);
+        User myUser;
+        myUser = new User(curName, "0");
+        Task t3 = mDatabase.child("users").child(myUser.username).setValue(myUser);
+
+        if(!t3.isSuccessful()){
+            Toast.makeText(getApplicationContext(),"Unable to add!",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     // Add 5 points Button
     public void addFivePoints(View view) {
         RealtimeDatabaseActivity.this.onAddScore(mDatabase, player.isChecked() ? "user1" : "user2");
@@ -100,6 +125,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
 
         user = new User("user2", "0");
         Task t2 = mDatabase.child("users").child(user.username).setValue(user);
+
 
         if(!t1.isSuccessful() && !t2.isSuccessful()){
             Toast.makeText(getApplicationContext(),"Unable to reset players!",Toast.LENGTH_SHORT).show();
