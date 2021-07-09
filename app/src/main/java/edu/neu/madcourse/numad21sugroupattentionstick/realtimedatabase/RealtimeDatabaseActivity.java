@@ -128,7 +128,14 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
 
     // Add 5 points Button
     public void addFivePoints(View view, String imageNum) {
-        RealtimeDatabaseActivity.this.onAddScore(mDatabase, player.isChecked() ? "user1" : "user2",imageNum);
+
+        EditText givenName = (EditText) findViewById(R.id.receiverusername_id);
+        String curName = givenName.getText().toString();
+
+        //User receiver = new User(curName, "0", "");
+
+        //RealtimeDatabaseActivity.this.onAddScore(mDatabase, player.isChecked() ? "user1" : "user2",imageNum);
+        RealtimeDatabaseActivity.this.onAddScore(mDatabase, curName,imageNum);
     }
 
     // Reset USERS Button

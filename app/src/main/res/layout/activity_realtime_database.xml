@@ -156,6 +156,27 @@
             android:layout_toEndOf="@+id/add_button1_id"
             android:text="image2"
             android:onClick="addImage2"/>
+
+        <EditText
+            android:id="@+id/receiverusername_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_button2_id"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/receiverusernamelabel_id"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/receiverusernamelabel_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_button1_id"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="30dp"
+            android:text="Receiver Name" />
     </RelativeLayout>
 
     <LinearLayout
