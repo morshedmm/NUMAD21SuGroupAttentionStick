@@ -241,6 +241,8 @@ public class FCMActivity extends AppCompatActivity {
     // This method displays the user's sticker history
     public void getStickerHistory(View view) {
 
+        // Display the list of stickers
+
 
     }
 }
