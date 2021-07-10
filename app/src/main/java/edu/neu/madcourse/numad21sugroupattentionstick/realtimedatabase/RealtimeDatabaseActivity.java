@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +24,11 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import edu.neu.madcourse.numad21sugroupattentionstick.MyItemCard;
 import edu.neu.madcourse.numad21sugroupattentionstick.MyRviewAdapter;
@@ -47,6 +52,10 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     private MyRviewAdapter rviewAdapter;
     private RecyclerView.LayoutManager rLayoutManger;
     private ArrayList<MyItemCard> itemList = new ArrayList<>();
+    private RadioGroup radioGroup;
+    //RadioButton checkedRadioButton = (RadioButton)radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
+
+
 
 
     @SuppressLint("RestrictedApi")
@@ -60,6 +69,32 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         //score_user1 = (TextView) findViewById(R.id.score1);
         //score_user2 = (TextView) findViewById(R.id.score2);
         player = (RadioButton) findViewById(R.id.player1);
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
+
+        //
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup arg0, int id) {
+                switch (id) {
+
+                    case R.id.player1:
+                        Log.i(TAG, "button1");
+                        showReadData(findViewById(android.R.id.content),"");
+                        break;
+                    case R.id.player2:
+                        Log.i(TAG, "button2");
+                        showReadData(findViewById(android.R.id.content),"sent");
+                        break;
+                    default:
+                        Log.i(TAG, "nothing!");
+                        break;
+                }
+            }
+        });
+
+
+        //
 
         // Connect with firebase
         //
@@ -272,6 +307,55 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
 
 
                 });
+    }
+
+    private String parseData(String inputStr) throws JSONException {
+        JSONObject jObject = new JSONObject(inputStr);
+        Iterator<?> keys = jObject.keys();
+        while( keys.hasNext() ){
+            String key = (String)keys.next();
+            if (key.equals("user1")) {
+                return jObject.getString(key);
+            }
+        }
+        return "Nothing matched!";
+
+    }
+
+    public void showReadData(View view, String addition) {
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Log.i("status:","INSIDEEEEE");
+                //User user = dataSnapshot.getValue(User.class);
+                //if (user == null) return;
+                //Log.i("All Data",user.score);
+                //Log.i("MYDATA",dataSnapshot.getValue().toString());
+                //Log.i("usersdata", String.valueOf(dataSnapshot.child("users").child("user1").child("score").getValue()));
+
+                String [] stickerIdList = getStringList(String.valueOf(dataSnapshot.child("users").child("user1" + addition).child("score").getValue()));
+                String [] userList = getStringList(String.valueOf(dataSnapshot.child("users").child("user1" + addition).child("senders").getValue()));
+                itemList = new ArrayList<>();
+                for (int idx = 0; idx < stickerIdList.length; idx++) {
+                    if (stickerIdList[idx].equals("1")){
+                        MyItemCard itemCard = new MyItemCard(R.drawable.foo, "", userList[idx], false);
+                        itemList.add(itemCard);
+                        //continue;
+                    } else if (stickerIdList[idx].equals("2")) {
+                        MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face, "", userList[idx], false);
+                        itemList.add(itemCard);
+                    }
+                }
+                createRecyclerView();
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // ...
+            }
+        });
     }
 
     private String[] getStringList(String inputString) {

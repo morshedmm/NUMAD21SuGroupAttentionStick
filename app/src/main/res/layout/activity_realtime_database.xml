@@ -97,6 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/receiverusernamelabel_id"
+            android:id="@+id/radioGroup1"
             android:layout_marginTop="20dp">
 
             <RadioButton
@@ -143,6 +144,17 @@
             app:layout_constraintHorizontal_bias="0.459"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/test_button_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="253dp"
+            android:layout_marginBottom="225dp"
+            android:onClick="showReadData"
+            android:text="testbutton" />
     </RelativeLayout>
 
     <LinearLayout
