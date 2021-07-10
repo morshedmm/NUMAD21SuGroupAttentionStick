@@ -213,6 +213,7 @@ public class FCMActivity extends AppCompatActivity {
 
     }
 
+    // This method sends a sticker to another user of the app
     public void sendSticker(View view) {
     }
 }
