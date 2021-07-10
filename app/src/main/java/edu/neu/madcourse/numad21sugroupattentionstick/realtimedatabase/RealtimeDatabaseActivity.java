@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
@@ -21,6 +23,10 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
+import edu.neu.madcourse.numad21sugroupattentionstick.MyItemCard;
+import edu.neu.madcourse.numad21sugroupattentionstick.MyRviewAdapter;
 import edu.neu.madcourse.numad21sugroupattentionstick.R;
 import edu.neu.madcourse.numad21sugroupattentionstick.realtimedatabase.models.User;
 
@@ -37,6 +43,11 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
 
     // Adding variable to hold my user name
     private User myUser;
+    private RecyclerView recyclerView;
+    private MyRviewAdapter rviewAdapter;
+    private RecyclerView.LayoutManager rLayoutManger;
+    private ArrayList<MyItemCard> itemList = new ArrayList<>();
+
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -131,6 +142,20 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         //RealtimeDatabaseActivity.this.onAddScore(mDatabase, player.isChecked() ? "user1" : "user2",imageNum);
         RealtimeDatabaseActivity.this.onAddScore(mDatabase, curName,imageNum,myUser.username);
         RealtimeDatabaseActivity.this.onAddScore(mDatabase, myUser.username+"sent",imageNum,curName);
+    }
+
+    private void createRecyclerView() {
+        rLayoutManger = new LinearLayoutManager(this);
+
+        recyclerView = findViewById(R.id.recycler_view2);
+        recyclerView.setHasFixedSize(true);
+        //recyclerView.setNestedScrollingEnabled(false);
+
+        rviewAdapter = new MyRviewAdapter(itemList);
+
+        recyclerView.setAdapter(rviewAdapter);
+        recyclerView.setLayoutManager(rLayoutManger);
+
     }
 
     // Reset USERS Button
@@ -249,6 +274,10 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
                 });
     }
 
+    private String[] getStringList(String inputString) {
+        return inputString.split(" ");
+    }
+
 
     private void showScore(DataSnapshot dataSnapshot) {
         User user = dataSnapshot.getValue(User.class);
@@ -256,9 +285,17 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         if (dataSnapshot.getKey().equalsIgnoreCase("user1")) {
             score_user1.setText(String.valueOf(user.score));
             user1.setText(user.username);
+            String [] stickerIdList = getStringList(String.valueOf(user.score));
+            String [] userList = getStringList(String.valueOf(user.senders));
+            itemList = new ArrayList<>();
+            for (int idx = 0; idx < stickerIdList.length; idx++) {
+                MyItemCard itemCard = new MyItemCard(0, stickerIdList[idx], userList[idx], false);
+                itemList.add(itemCard);
+            }
+            createRecyclerView();
         } else {
-            score_user2.setText(String.valueOf(user.score));
-            user2.setText(user.username);
+            //score_user2.setText(String.valueOf(user.score));
+            //user2.setText(user.username);
         }
     }
 
