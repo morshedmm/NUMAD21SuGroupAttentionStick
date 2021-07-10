@@ -32,7 +32,7 @@ public class MyRviewAdapter extends RecyclerView.Adapter<MyRviewHolder> {
     public void onBindViewHolder(MyRviewHolder holder, int position) {
         MyItemCard currentItem = itemList.get(position);
 
-        //holder.itemIcon.setImageResource(currentItem.getImageSource());
+        holder.itemIcon.setImageResource(currentItem.getImageSource());
         holder.itemName.setText(currentItem.getItemName());
         holder.itemDesc.setText(currentItem.getItemDesc());
         //holder.checkBox.setChecked(currentItem.getStatus());

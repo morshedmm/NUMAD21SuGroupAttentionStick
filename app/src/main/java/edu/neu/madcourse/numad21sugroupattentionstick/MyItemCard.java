@@ -4,6 +4,7 @@ public class MyItemCard implements ItemClickListener{
 
     private final String itemName;
     private final String itemDesc;
+    private int imageSource;
 
 
     //Constructor
@@ -11,6 +12,7 @@ public class MyItemCard implements ItemClickListener{
 
         this.itemName = itemName;
         this.itemDesc = itemDesc;
+        this.imageSource = imageSource;
     }
 
     //Getters for the imageSource, itemName and itemDesc
@@ -22,6 +24,10 @@ public class MyItemCard implements ItemClickListener{
 
     public String getItemName() {
         return itemName;
+    }
+
+    public int getImageSource() {
+        return imageSource;
     }
 
 

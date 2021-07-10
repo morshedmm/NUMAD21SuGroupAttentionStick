@@ -8,14 +8,14 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MyRviewHolder extends RecyclerView.ViewHolder {
-    //public ImageView itemIcon;
+    public ImageView itemIcon;
     public TextView itemName;
     public TextView itemDesc;
     //public CheckBox checkBox;
 
     public MyRviewHolder(View itemView, final ItemClickListener listener) {
         super(itemView);
-        //itemIcon = itemView.findViewById(R.id.item_icon);
+        itemIcon = itemView.findViewById(R.id.item_icon);
         itemName = itemView.findViewById(R.id.my_item_name);
         itemDesc = itemView.findViewById(R.id.my_item_desc);
         //checkBox = itemView.findViewById(R.id.checkbox);

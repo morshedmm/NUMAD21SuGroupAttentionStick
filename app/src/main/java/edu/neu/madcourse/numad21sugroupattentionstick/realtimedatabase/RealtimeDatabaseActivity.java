@@ -42,7 +42,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     private RadioButton player;
 
     // Adding variable to hold my user name
-    private User myUser;
+    private User myUser = new User("","","");
     private RecyclerView recyclerView;
     private MyRviewAdapter rviewAdapter;
     private RecyclerView.LayoutManager rLayoutManger;
@@ -282,14 +282,19 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     private void showScore(DataSnapshot dataSnapshot) {
         User user = dataSnapshot.getValue(User.class);
 
-        if (dataSnapshot.getKey().equalsIgnoreCase("user1")) {
+        if (dataSnapshot.getKey().equalsIgnoreCase(myUser.username+"sent")) {
             score_user1.setText(String.valueOf(user.score));
             user1.setText(user.username);
             String [] stickerIdList = getStringList(String.valueOf(user.score));
             String [] userList = getStringList(String.valueOf(user.senders));
             itemList = new ArrayList<>();
             for (int idx = 0; idx < stickerIdList.length; idx++) {
-                MyItemCard itemCard = new MyItemCard(0, stickerIdList[idx], userList[idx], false);
+                if (stickerIdList[idx].equals("1")){
+                    MyItemCard itemCard = new MyItemCard(R.drawable.foo, "", userList[idx], false);
+                    itemList.add(itemCard);
+                    continue;
+                }
+                MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face, "", userList[idx], false);
                 itemList.add(itemCard);
             }
             createRecyclerView();
