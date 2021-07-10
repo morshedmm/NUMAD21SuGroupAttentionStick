@@ -15,11 +15,17 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
+import edu.neu.madcourse.numad21sugroupattentionstick.MyItemCard;
 import edu.neu.madcourse.numad21sugroupattentionstick.utils.Utils;
 import edu.neu.madcourse.numad21sugroupattentionstick.R;
 
 
 public class FCMActivity extends AppCompatActivity {
+
+    // The list of stickers is composed of MyItemCards
+    private ArrayList<MyItemCard> stickerList = new ArrayList<>();
 
 
     private static final String TAG = "FCMActivity";
@@ -215,5 +221,13 @@ public class FCMActivity extends AppCompatActivity {
 
     // This method sends a sticker to another user of the app
     public void sendSticker(View view) {
+
+        // Create a sticker using MyItemCard
+
+
+        // Send sticker to another user of the app
+
+
+
     }
 }
