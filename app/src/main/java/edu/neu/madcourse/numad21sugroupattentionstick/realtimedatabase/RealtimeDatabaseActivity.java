@@ -55,10 +55,10 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_realtime_database);
 
-        user1 = (TextView) findViewById(R.id.username1);
-        user2 = (TextView) findViewById(R.id.username2);
-        score_user1 = (TextView) findViewById(R.id.score1);
-        score_user2 = (TextView) findViewById(R.id.score2);
+        //user1 = (TextView) findViewById(R.id.username1);
+        //user2 = (TextView) findViewById(R.id.username2);
+        //score_user1 = (TextView) findViewById(R.id.score1);
+        //score_user2 = (TextView) findViewById(R.id.score2);
         //player = (RadioButton) findViewById(R.id.player1);
 
         // Connect with firebase
@@ -210,8 +210,8 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
                 // whenever data at this location is updated.
                 String value = dataSnapshot.getValue(String.class);
                 Log.d(TAG, "Value is: " + value);
-                TextView tv = (TextView) findViewById(R.id.dataUpdateTextView);
-                tv.setText(value);
+                //TextView tv = (TextView) findViewById(R.id.dataUpdateTextView);
+                //tv.setText(value);
                 //
                 dataSnapshot.getKey().equals("users");
                 //
@@ -283,8 +283,8 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         User user = dataSnapshot.getValue(User.class);
 
         if (dataSnapshot.getKey().equalsIgnoreCase(myUser.username+"sent")) {
-            score_user1.setText(String.valueOf(user.score));
-            user1.setText(user.username);
+            //score_user1.setText(String.valueOf(user.score));
+            //user1.setText(user.username);
             String [] stickerIdList = getStringList(String.valueOf(user.score));
             String [] userList = getStringList(String.valueOf(user.senders));
             itemList = new ArrayList<>();
@@ -292,10 +292,11 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
                 if (stickerIdList[idx].equals("1")){
                     MyItemCard itemCard = new MyItemCard(R.drawable.foo, "", userList[idx], false);
                     itemList.add(itemCard);
-                    continue;
+                    //continue;
+                } else if (stickerIdList[idx].equals("2")) {
+                    MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face, "", userList[idx], false);
+                    itemList.add(itemCard);
                 }
-                MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face, "", userList[idx], false);
-                itemList.add(itemCard);
             }
             createRecyclerView();
         } else {
