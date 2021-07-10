@@ -212,4 +212,7 @@ public class FCMActivity extends AppCompatActivity {
         Utils.postToastMessage("Status from Server: " + resp, getApplicationContext());
 
     }
+
+    public void sendSticker(View view) {
+    }
 }

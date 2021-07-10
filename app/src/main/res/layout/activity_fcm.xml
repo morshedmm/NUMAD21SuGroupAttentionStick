@@ -78,5 +78,13 @@
         android:onClick="sendMessageToDevice"
         android:text="@string/send_notification" />
 
+    <Button
+        android:id="@+id/sendSticker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="sendSticker"
+        android:text="Send Sticker" />
+
 
 </LinearLayout>
