@@ -59,7 +59,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         //user2 = (TextView) findViewById(R.id.username2);
         //score_user1 = (TextView) findViewById(R.id.score1);
         //score_user2 = (TextView) findViewById(R.id.score2);
-        //player = (RadioButton) findViewById(R.id.player1);
+        player = (RadioButton) findViewById(R.id.player1);
 
         // Connect with firebase
         //
@@ -282,7 +282,10 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     private void showScore(DataSnapshot dataSnapshot) {
         User user = dataSnapshot.getValue(User.class);
 
-        if (dataSnapshot.getKey().equalsIgnoreCase(myUser.username+"sent")) {
+        String whoseInfo = player.isChecked() ? myUser.username : myUser.username+"sent";
+        Log.i("INFO", whoseInfo);
+
+        if (dataSnapshot.getKey().equalsIgnoreCase(whoseInfo)) {
             //score_user1.setText(String.valueOf(user.score));
             //user1.setText(user.username);
             String [] stickerIdList = getStringList(String.valueOf(user.score));

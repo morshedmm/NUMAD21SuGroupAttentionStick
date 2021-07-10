@@ -93,6 +93,28 @@
             android:layout_marginTop="30dp"
             android:text="Receiver Name" />
 
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/receiverusernamelabel_id"
+            android:layout_marginTop="20dp">
+
+            <RadioButton
+                android:checked="true"
+                android:text="My Stickers"
+                android:id="@+id/player1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:text="Stickers I Sent"
+                android:id="@+id/player2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </RadioGroup>
+
         <Button
             android:id="@+id/reset"
             android:layout_width="76dp"
