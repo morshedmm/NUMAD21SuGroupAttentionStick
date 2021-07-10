@@ -27,6 +27,8 @@ public class FCMActivity extends AppCompatActivity {
     // The list of stickers is composed of MyItemCards
     private ArrayList<MyItemCard> stickerList = new ArrayList<>();
 
+    // The user's sticker history is displayed as a scrollable list?
+
 
     private static final String TAG = "FCMActivity";
     // Please add the server key from your firebase console in the follwoing format "key=<serverKey>"
@@ -223,10 +225,21 @@ public class FCMActivity extends AppCompatActivity {
     public void sendSticker(View view) {
 
         // Create a sticker using MyItemCard
+        MyItemCard sticker = new MyItemCard(R.drawable.unicorn_png_transparent12,
+                "new sticker", "sticker", false);
+
+        // Add the new sticker to the sticker list
+        stickerList.add(sticker);
 
 
         // Send sticker to another user of the app
 
+
+
+    }
+
+    // This method displays the user's sticker history
+    public void getStickerHistory(View view) {
 
 
     }
