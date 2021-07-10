@@ -6,6 +6,9 @@ public class MyItemCard implements ItemClickListener{
     private final String itemDesc;
     private int imageSource;
 
+    // sender name
+    private String senderName;
+
 
     //Constructor
     public MyItemCard(int imageSource, String itemName, String itemDesc, boolean isChecked) {
