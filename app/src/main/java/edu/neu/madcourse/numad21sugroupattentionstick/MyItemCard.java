@@ -6,7 +6,7 @@ public class MyItemCard implements ItemClickListener{
     private final String itemDesc;
     private int imageSource;
 
-    // sender name
+    // sender name = user name?
     private String senderName;
 
 
