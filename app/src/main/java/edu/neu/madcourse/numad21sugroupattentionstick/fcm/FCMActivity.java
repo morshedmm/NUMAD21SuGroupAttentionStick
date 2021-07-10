@@ -28,6 +28,7 @@ public class FCMActivity extends AppCompatActivity {
     // How to generate your own key: https://console.firebase.google.com/project/<your-project-name>/settings/cloudmessaging
     private static String SERVER_KEY = "key=AAAAgnRhtk4:APA91bE0rNmwPotfBuAQ_hT_Jrs75GDmKw9ks119_tv4PfqzCyK7OV_ThNDDEdHOehFgb7EexauCkfzxEM2iFK_H-gwTXNO8yKUqA_edxa0dl9nSTn9DFibO4ae75XSG315KSXPzdCPt";
 
+
     // This is the client registration token
     private static String CLIENT_REGISTRATION_TOKEN;
 
@@ -39,7 +40,7 @@ public class FCMActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fcm);
 
         // CHECK NULL when you want to use
-        SERVER_KEY = "key=" + Utils.getProperties(getApplicationContext()).getProperty("SERVER_KEY");
+      //  SERVER_KEY = "key=" + Utils.getProperties(getApplicationContext()).getProperty("SERVER_KEY");
 
         // Generate the token for the first time, then no need to do later
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
