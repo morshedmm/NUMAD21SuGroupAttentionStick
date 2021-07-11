@@ -38,7 +38,8 @@ import edu.neu.madcourse.numad21sugroupattentionstick.realtimedatabase.models.Us
 public class RealtimeDatabaseActivity extends AppCompatActivity {
 
     private static final String TAG = RealtimeDatabaseActivity.class.getSimpleName();
-
+    private static final String USER_1 = "user1";
+    private static final String USER_2 = "user2";
     private DatabaseReference mDatabase;
     private TextView user1;
     private TextView score_user1;
@@ -143,17 +144,31 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         Task t3 = mDatabase.child("users").child(myUser.username).setValue(myUser);
         */
 
-        EditText givenName = (EditText) findViewById(R.id.myusername_id);
-        String curName = givenName.getText().toString();
-        Log.i("usernamevalue", curName);
+        try {
+            EditText givenName = (EditText) findViewById(R.id.myusername_id);
+            String curName = givenName.getText().toString();
+            Log.i("usernamevalue", curName);
+            if(!curName.equals(USER_1) && !curName.equals(USER_2)){
+                throw new IllegalArgumentException("Username must be "+ USER_1 + " or "+USER_2);
+            }
 
+            //User myUser;
+            myUser = new User(curName, "0", "");
+            Log.i("Login", "Logged In as " + curName);
+            Toast.makeText(RealtimeDatabaseActivity.this,
+                    "Logged In as " + curName, Toast.LENGTH_SHORT).show();
+        }
+        catch (IllegalArgumentException e){
+            Log.e("Login", "Login failed! " + e.getMessage());
+            Toast.makeText(RealtimeDatabaseActivity.this,
+                    "Login failed! " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e) {
+            Log.e("Login", "Login failed!");
+            Toast.makeText(RealtimeDatabaseActivity.this,
+                    "Login failed!", Toast.LENGTH_SHORT).show();
+        }
 
-
-        //User myUser;
-        myUser = new User(curName, "0", "");
-
-
-        //}
 
     }
 
@@ -209,18 +224,18 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
 
         User user;
         //user = new User("user1", "0");
-        user = new User("user1", "","");
+        user = new User(USER_1, "","");
         Task t1 = mDatabase.child("users").child(user.username).setValue(user);
 
         //user = new User("user2", "0");
-        user = new User("user2", "","");
+        user = new User(USER_2, "","");
         Task t2 = mDatabase.child("users").child(user.username).setValue(user);
 
-        user = new User("user1sent", "","");
+        user = new User(USER_1+"sent", "","");
         Task t3 = mDatabase.child("users").child(user.username).setValue(user);
 
         //user = new User("user2", "0");
-        user = new User("user2sent", "","");
+        user = new User(USER_2+"sent", "","");
         Task t4 = mDatabase.child("users").child(user.username).setValue(user);
 
         if(!t1.isSuccessful() && !t2.isSuccessful()){
@@ -325,7 +340,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         Iterator<?> keys = jObject.keys();
         while( keys.hasNext() ){
             String key = (String)keys.next();
-            if (key.equals("user1")) {
+            if (key.equals(USER_1)) {
                 return jObject.getString(key);
             }
         }
