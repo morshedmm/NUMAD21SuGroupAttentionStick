@@ -159,15 +159,15 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     }
 
     public void addImage1(View view) {
-        addFivePoints(view, "1");
+        addEmote(view, "1");
     }
 
     public void addImage2(View view) {
-        addFivePoints(view, "2");
+        addEmote(view, "2");
     }
 
     // Add 5 points Button
-    public void addFivePoints(View view, String imageNum) {
+    public void addEmote(View view, String imageNum) {
 
         EditText givenName = (EditText) findViewById(R.id.receiverusername_id);
         String curName = givenName.getText().toString();
