@@ -172,6 +172,8 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         String receiverUsername = receiverUsernameField.getText().toString();
         if(receiverUsername == null || receiverUsername.equals("")){
             Log.i("Adding Emote", "No receiver username entered!");
+            Toast.makeText(RealtimeDatabaseActivity.this,
+                    "No receiver username entered!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -337,8 +339,10 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
                 //Log.i("MYDATA",dataSnapshot.getValue().toString());
                 //Log.i("usersdata", String.valueOf(dataSnapshot.child("users").child("user1").child("score").getValue()));
 
-                String [] stickerIdList = getStringList(String.valueOf(dataSnapshot.child("users").child(curUsername + addition).child("score").getValue()));
-                String [] userList = getStringList(String.valueOf(dataSnapshot.child("users").child(curUsername + addition).child("senders").getValue()));
+                String [] stickerIdList = getStringList(String.valueOf(dataSnapshot.child("users")
+                        .child(curUsername + addition).child("score").getValue()));
+                String [] userList = getStringList(String.valueOf(dataSnapshot.child("users")
+                        .child(curUsername + addition).child("senders").getValue()));
 
 
 //                String [] stickerIdList = getStringList(String.valueOf(dataSnapshot.child("users").child("user1" + addition).child("score").getValue()));
@@ -346,11 +350,13 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
                 itemList = new ArrayList<>();
                 for (int idx = 0; idx < stickerIdList.length; idx++) {
                     if (stickerIdList[idx].equals("1")){
-                        MyItemCard itemCard = new MyItemCard(R.drawable.foo, "", userList[idx], false);
+                        MyItemCard itemCard = new MyItemCard(R.drawable.foo, "",
+                                userList[idx], false);
                         itemList.add(itemCard);
                         //continue;
                     } else if (stickerIdList[idx].equals("2")) {
-                        MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face, "", userList[idx], false);
+                        MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face, "",
+                                userList[idx], false);
                         itemList.add(itemCard);
                     }
                 }
@@ -385,11 +391,13 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
             itemList = new ArrayList<>();
             for (int idx = 0; idx < stickerIdList.length; idx++) {
                 if (stickerIdList[idx].equals("1")){
-                    MyItemCard itemCard = new MyItemCard(R.drawable.foo, "", userList[idx], false);
+                    MyItemCard itemCard = new MyItemCard(R.drawable.foo, "",
+                            userList[idx], false);
                     itemList.add(itemCard);
                     //continue;
                 } else if (stickerIdList[idx].equals("2")) {
-                    MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face, "", userList[idx], false);
+                    MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face,
+                            "", userList[idx], false);
                     itemList.add(itemCard);
                 }
             }
