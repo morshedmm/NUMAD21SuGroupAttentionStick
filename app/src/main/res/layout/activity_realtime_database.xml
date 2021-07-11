@@ -1,161 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_realtime_database"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    tools:context=".realtimedatabase.RealtimeDatabaseActivity">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/myusername_id"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toEndOf="@+id/usernamelabel_id"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/loginbutton_id"
+        app:layout_constraintStart_toEndOf="@+id/usernamelabel_id"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        android:layout_above="@+id/linearLayout">
+    <TextView
+        android:id="@+id/usernamelabel_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="20dp"
+        android:text="Username"
+        app:layout_constraintEnd_toStartOf="@+id/myusername_id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/loginbutton_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myusername_id"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/usernamelabel_id"
+        android:onClick="setUserName"
+        android:text="LogIn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myusername_id" />
 
-        <EditText
-            android:id="@+id/myusername_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/usernamelabel_id"
-            android:ems="10"
-            android:inputType="textPersonName" />
+    <Button
+        android:id="@+id/add_button1_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginbutton_id"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:onClick="addImage1"
+        android:text="image1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginbutton_id" />
 
-        <TextView
-            android:id="@+id/usernamelabel_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:text="Username" />
+    <Button
+        android:id="@+id/add_button2_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginbutton_id"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:layout_toEndOf="@+id/add_button1_id"
+        android:onClick="addImage2"
+        android:text="image2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginbutton_id" />
 
-        <Button
-            android:id="@+id/loginbutton_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/myusername_id"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="20dp"
-            android:onClick="setUserName"
-            android:layout_toEndOf="@+id/usernamelabel_id"
-            android:text="LogIn" />
+    <EditText
+        android:id="@+id/receiverusername_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_button2_id"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/receiverusernamelabel_id"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/receiverusernamelabel_id"
+        app:layout_constraintTop_toBottomOf="@+id/add_button1_id" />
 
-        <Button
-            android:id="@+id/add_button1_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/loginbutton_id"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="63dp"
-            android:layout_marginTop="20dp"
-            android:text="image1"
-            android:onClick="addImage1"/>
-
-        <Button
-            android:id="@+id/add_button2_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/loginbutton_id"
-            android:layout_marginStart="67dp"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@+id/add_button1_id"
-            android:text="image2"
-            android:onClick="addImage2"/>
-
-        <EditText
-            android:id="@+id/receiverusername_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/add_button2_id"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/receiverusernamelabel_id"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/receiverusernamelabel_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/add_button1_id"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="34dp"
-            android:layout_marginTop="30dp"
-            android:text="Receiver Name" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/receiverusernamelabel_id"
-            android:id="@+id/radioGroup1"
-            android:layout_marginTop="20dp">
-
-            <RadioButton
-                android:checked="true"
-                android:text="My Stickers"
-                android:id="@+id/my_stickers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <RadioButton
-                android:text="Stickers I Sent"
-                android:id="@+id/stickers_i_sent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/receiverusernamelabel_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_button1_id"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="20dp"
+        android:text="Receiver Name"
+        app:layout_constraintEnd_toStartOf="@+id/receiverusername_id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_button1_id" />
 
 
-        </RadioGroup>
-
-        <Button
-            android:id="@+id/reset"
-            android:layout_width="76dp"
-            android:layout_height="55dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="154dp"
-            android:layout_marginBottom="120dp"
-            android:onClick="resetUsers"
-            android:text="Reset Users" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view2"
-            android:layout_width="79dp"
-            android:layout_height="98dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="-83dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@android:color/background_light"
-            android:padding="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.459"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="76dp"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:onClick="resetUsers"
+        android:text="Reset Users"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.745"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="400dp"
+        android:background="@android:color/background_light"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<RadioGroup
+android:id="@+id/radioGroup1"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_below="@+id/receiverusernamelabel_id"
+android:layout_marginTop="20dp"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintHorizontal_bias="0.0"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toBottomOf="@+id/receiverusername_id">
+
+    <RadioButton
+        android:id="@+id/my_stickers"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout">
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:checked="true"
+        android:text="My Stickers"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup1" />
+
+    <RadioButton
+        android:id="@+id/stickers_i_sent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:text="Stickers I Sent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_stickers" />
 
 
-    </LinearLayout>
 
-</RelativeLayout>
+</RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
