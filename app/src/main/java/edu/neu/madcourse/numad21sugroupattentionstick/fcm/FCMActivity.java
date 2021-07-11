@@ -256,8 +256,6 @@ public class FCMActivity extends AppCompatActivity {
 
     }
 
-
-
     private void init(Bundle savedInstanceState) {
 
         initialItem(savedInstanceState);
