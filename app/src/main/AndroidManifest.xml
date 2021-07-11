@@ -13,7 +13,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Stick It"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -27,7 +27,7 @@
         </activity>
 
         <activity android:name=".fcm.FCMActivity" />
-        <activity android:name=".realtimedatabase.RealtimeDatabaseActivity" />
+        <activity android:name=".realtimedatabase.RealtimeDatabaseActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".showpermissions.ShowPermActivity"
             android:label="Permissions in Android" />
