@@ -41,10 +41,10 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     private static final String USER_1 = "user1";
     private static final String USER_2 = "user2";
     private DatabaseReference mDatabase;
-    private TextView user1;
-    private TextView score_user1;
-    private TextView user2;
-    private TextView score_user2;
+    private TextView sender;
+    private TextView score_sender;
+    private TextView recipient;
+    private TextView score_recipient;
     private RadioButton player;
 
     // Adding variable to hold my user name
@@ -148,9 +148,11 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
             EditText givenName = (EditText) findViewById(R.id.myusername_id);
             String curName = givenName.getText().toString();
             Log.i("usernamevalue", curName);
-            if(!curName.equals(USER_1) && !curName.equals(USER_2)){
-                throw new IllegalArgumentException("Username must be "+ USER_1 + " or "+USER_2);
-            }
+            DatabaseReference db = mDatabase.child("users");
+            String user = String.valueOf(db.child(curName));
+//            if(){
+//                throw new IllegalArgumentException("Username must be "+ USER_1 + " or "+USER_2);
+//            }
             showReadData(findViewById(android.R.id.content),player.isChecked() ? "" : "sent");
             //User myUser;
             myUser = new User(curName, "0", "");
