@@ -24,6 +24,7 @@ import edu.neu.madcourse.numad21sugroupattentionstick.MyRviewAdapter;
 import edu.neu.madcourse.numad21sugroupattentionstick.utils.Utils;
 import edu.neu.madcourse.numad21sugroupattentionstick.R;
 
+// Test branch edit
 
 public class FCMActivity extends AppCompatActivity {
 
