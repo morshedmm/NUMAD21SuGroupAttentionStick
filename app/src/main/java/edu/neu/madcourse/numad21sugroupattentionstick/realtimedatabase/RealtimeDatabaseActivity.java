@@ -176,6 +176,12 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
                     "No receiver username entered!", Toast.LENGTH_SHORT).show();
             return;
         }
+        if(myUser == null || myUser.username == null || myUser.username.equals("")){
+            Log.i("Adding Emote", "Please log in before sending emotes!");
+            Toast.makeText(RealtimeDatabaseActivity.this,
+                    "Please log in before sending emotes!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         //User receiver = new User(curName, "0", "");
 
