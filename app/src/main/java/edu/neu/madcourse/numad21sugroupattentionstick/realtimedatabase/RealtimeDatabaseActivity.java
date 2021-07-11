@@ -79,11 +79,11 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
                 switch (id) {
 
                     case R.id.player1:
-                        Log.i(TAG, "button1");
+                        Log.i(TAG, "My Stickers radio button pressed");
                         showReadData(findViewById(android.R.id.content),"");
                         break;
                     case R.id.player2:
-                        Log.i(TAG, "button2");
+                        Log.i(TAG, "Stickers I sent radio button pressed");
                         showReadData(findViewById(android.R.id.content),"sent");
                         break;
                     default:
