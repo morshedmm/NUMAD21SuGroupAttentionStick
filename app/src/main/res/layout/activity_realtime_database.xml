@@ -103,13 +103,13 @@
             <RadioButton
                 android:checked="true"
                 android:text="My Stickers"
-                android:id="@+id/player1"
+                android:id="@+id/my_stickers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <RadioButton
                 android:text="Stickers I Sent"
-                android:id="@+id/player2"
+                android:id="@+id/stickers_i_sent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

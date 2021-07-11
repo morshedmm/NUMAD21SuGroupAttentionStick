@@ -68,7 +68,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         //user2 = (TextView) findViewById(R.id.username2);
         //score_user1 = (TextView) findViewById(R.id.score1);
         //score_user2 = (TextView) findViewById(R.id.score2);
-        player = (RadioButton) findViewById(R.id.player1);
+        player = (RadioButton) findViewById(R.id.my_stickers);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
 
         //
@@ -78,11 +78,11 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup arg0, int id) {
                 switch (id) {
 
-                    case R.id.player1:
+                    case R.id.my_stickers:
                         Log.i(TAG, "My Stickers radio button pressed");
                         showReadData(findViewById(android.R.id.content),"");
                         break;
-                    case R.id.player2:
+                    case R.id.stickers_i_sent:
                         Log.i(TAG, "Stickers I sent radio button pressed");
                         showReadData(findViewById(android.R.id.content),"sent");
                         break;
