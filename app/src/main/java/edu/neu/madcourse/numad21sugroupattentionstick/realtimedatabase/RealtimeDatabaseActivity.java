@@ -77,7 +77,6 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup arg0, int id) {
                 switch (id) {
-
                     case R.id.my_stickers:
                         Log.i(TAG, "My Stickers radio button pressed");
                         showReadData(findViewById(android.R.id.content),"");
@@ -106,13 +105,13 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
 
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        showScore(dataSnapshot);
+                        drawEmotes(dataSnapshot);
                         Log.e(TAG, "onChildAdded: dataSnapshot = " + dataSnapshot.getValue().toString());
                     }
 
                     @Override
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                        showScore(dataSnapshot);
+                        drawEmotes(dataSnapshot);
                         Log.v(TAG, "onChildChanged: " + dataSnapshot.getValue().toString());
                     }
 
@@ -166,7 +165,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         addEmote(view, "2");
     }
 
-    // Add 5 points Button
+    // Add Emote based on String
     public void addEmote(View view, String imageNum) {
 
         EditText givenName = (EditText) findViewById(R.id.receiverusername_id);
@@ -327,14 +326,19 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Log.i("status:","INSIDEEEEE");
-                //User user = dataSnapshot.getValue(User.class);
+                String curUsername = myUser.username;
+//                curUsername = user.username;
                 //if (user == null) return;
                 //Log.i("All Data",user.score);
                 //Log.i("MYDATA",dataSnapshot.getValue().toString());
                 //Log.i("usersdata", String.valueOf(dataSnapshot.child("users").child("user1").child("score").getValue()));
 
-                String [] stickerIdList = getStringList(String.valueOf(dataSnapshot.child("users").child("user1" + addition).child("score").getValue()));
-                String [] userList = getStringList(String.valueOf(dataSnapshot.child("users").child("user1" + addition).child("senders").getValue()));
+                String [] stickerIdList = getStringList(String.valueOf(dataSnapshot.child("users").child(curUsername + addition).child("score").getValue()));
+                String [] userList = getStringList(String.valueOf(dataSnapshot.child("users").child(curUsername + addition).child("senders").getValue()));
+
+
+//                String [] stickerIdList = getStringList(String.valueOf(dataSnapshot.child("users").child("user1" + addition).child("score").getValue()));
+//                String [] userList = getStringList(String.valueOf(dataSnapshot.child("users").child("user1" + addition).child("senders").getValue()));
                 itemList = new ArrayList<>();
                 for (int idx = 0; idx < stickerIdList.length; idx++) {
                     if (stickerIdList[idx].equals("1")){
@@ -363,7 +367,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     }
 
 
-    private void showScore(DataSnapshot dataSnapshot) {
+    private void drawEmotes(DataSnapshot dataSnapshot) {
         User user = dataSnapshot.getValue(User.class);
 
         String whoseInfo = player.isChecked() ? myUser.username : myUser.username+"sent";
