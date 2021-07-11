@@ -194,9 +194,10 @@ public class FCMActivity extends AppCompatActivity {
         JSONObject jdata = new JSONObject();
         try {
             jNotification.put("title", "Message Title from 'SEND MESSAGE TO CLIENT BUTTON'");
-            jNotification.put("body", " edited Message body from 'SEND MESSAGE TO CLIENT BUTTON'");
+            jNotification.put("body", " Message body from 'SEND MESSAGE TO CLIENT BUTTON'");
             jNotification.put("sound", "default");
             jNotification.put("badge", "1");
+            jNotification.put("image", R.drawable.unicorn_png_transparent12 );
             /*
             // We can add more details into the notification if we want.
             // We happen to be ignoring them for this demo.
