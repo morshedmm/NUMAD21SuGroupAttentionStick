@@ -255,13 +255,6 @@ public class FCMActivity extends AppCompatActivity {
 
     }
 
-    // This method displays the user's sticker history
-    public void getStickerHistory(View view) {
-
-        // Display the list of stickers
-
-
-    }
 
 
     private void init(Bundle savedInstanceState) {
@@ -309,7 +302,7 @@ public class FCMActivity extends AppCompatActivity {
     // Making the Recycler View
     private void makeRecyclerView(){
 
-        // Making a page of items for scrolling
+        // Making a list of the user's sticker history for scrolling
         recyclerLayoutManager = new LinearLayoutManager(this);
 
         recyclerView = findViewById(R.id.recycler_view2);
