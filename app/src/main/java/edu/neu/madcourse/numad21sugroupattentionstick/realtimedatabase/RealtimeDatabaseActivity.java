@@ -38,7 +38,8 @@ import edu.neu.madcourse.numad21sugroupattentionstick.realtimedatabase.models.Us
 public class RealtimeDatabaseActivity extends AppCompatActivity {
 
     private static final String TAG = RealtimeDatabaseActivity.class.getSimpleName();
-
+    private static final String USER_1 = "user1";
+    private static final String USER_2 = "user2";
     private DatabaseReference mDatabase;
     private TextView user1;
     private TextView score_user1;
@@ -68,7 +69,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         //user2 = (TextView) findViewById(R.id.username2);
         //score_user1 = (TextView) findViewById(R.id.score1);
         //score_user2 = (TextView) findViewById(R.id.score2);
-        player = (RadioButton) findViewById(R.id.player1);
+        player = (RadioButton) findViewById(R.id.my_stickers);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
 
         //
@@ -77,13 +78,12 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup arg0, int id) {
                 switch (id) {
-
-                    case R.id.player1:
-                        Log.i(TAG, "button1");
+                    case R.id.my_stickers:
+                        Log.i(TAG, "My Stickers radio button pressed");
                         showReadData(findViewById(android.R.id.content),"");
                         break;
-                    case R.id.player2:
-                        Log.i(TAG, "button2");
+                    case R.id.stickers_i_sent:
+                        Log.i(TAG, "Stickers I sent radio button pressed");
                         showReadData(findViewById(android.R.id.content),"sent");
                         break;
                     default:
@@ -106,13 +106,13 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
 
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        showScore(dataSnapshot);
+                        drawEmotes(dataSnapshot);
                         Log.e(TAG, "onChildAdded: dataSnapshot = " + dataSnapshot.getValue().toString());
                     }
 
                     @Override
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                        showScore(dataSnapshot);
+                        drawEmotes(dataSnapshot);
                         Log.v(TAG, "onChildChanged: " + dataSnapshot.getValue().toString());
                     }
 
@@ -144,39 +144,65 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         Task t3 = mDatabase.child("users").child(myUser.username).setValue(myUser);
         */
 
-        EditText givenName = (EditText) findViewById(R.id.myusername_id);
-        String curName = givenName.getText().toString();
-        Log.i("usernamevalue", curName);
+        try {
+            EditText givenName = (EditText) findViewById(R.id.myusername_id);
+            String curName = givenName.getText().toString();
+            Log.i("usernamevalue", curName);
+            if(!curName.equals(USER_1) && !curName.equals(USER_2)){
+                throw new IllegalArgumentException("Username must be "+ USER_1 + " or "+USER_2);
+            }
 
+            //User myUser;
+            myUser = new User(curName, "0", "");
+            Log.i("Login", "Logged In as " + curName);
+            Toast.makeText(RealtimeDatabaseActivity.this,
+                    "Logged In as " + curName, Toast.LENGTH_SHORT).show();
+        }
+        catch (IllegalArgumentException e){
+            Log.e("Login", "Login failed! " + e.getMessage());
+            Toast.makeText(RealtimeDatabaseActivity.this,
+                    "Login failed! " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e) {
+            Log.e("Login", "Login failed!");
+            Toast.makeText(RealtimeDatabaseActivity.this,
+                    "Login failed!", Toast.LENGTH_SHORT).show();
+        }
 
-
-        //User myUser;
-        myUser = new User(curName, "0", "");
-
-
-        //}
 
     }
 
     public void addImage1(View view) {
-        addFivePoints(view, "1");
+        addEmote(view, "1");
     }
 
     public void addImage2(View view) {
-        addFivePoints(view, "2");
+        addEmote(view, "2");
     }
 
-    // Add 5 points Button
-    public void addFivePoints(View view, String imageNum) {
+    // Add Emote based on String
+    public void addEmote(View view, String imageNum) {
 
-        EditText givenName = (EditText) findViewById(R.id.receiverusername_id);
-        String curName = givenName.getText().toString();
+        EditText receiverUsernameField = (EditText) findViewById(R.id.receiverusername_id);
+        String receiverUsername = receiverUsernameField.getText().toString();
+        if(receiverUsername == null || receiverUsername.equals("")){
+            Log.i("Adding Emote", "No receiver username entered!");
+            Toast.makeText(RealtimeDatabaseActivity.this,
+                    "No receiver username entered!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(myUser == null || myUser.username == null || myUser.username.equals("")){
+            Log.i("Adding Emote", "Please log in before sending emotes!");
+            Toast.makeText(RealtimeDatabaseActivity.this,
+                    "Please log in before sending emotes!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         //User receiver = new User(curName, "0", "");
 
         //RealtimeDatabaseActivity.this.onAddScore(mDatabase, player.isChecked() ? "user1" : "user2",imageNum);
-        RealtimeDatabaseActivity.this.onAddScore(mDatabase, curName,imageNum,myUser.username);
-        RealtimeDatabaseActivity.this.onAddScore(mDatabase, myUser.username+"sent",imageNum,curName);
+        RealtimeDatabaseActivity.this.onAddScore(mDatabase, receiverUsername,imageNum,myUser.username);
+        RealtimeDatabaseActivity.this.onAddScore(mDatabase, myUser.username+"sent",imageNum,receiverUsername);
     }
 
     private void createRecyclerView() {
@@ -198,18 +224,18 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
 
         User user;
         //user = new User("user1", "0");
-        user = new User("user1", "","");
+        user = new User(USER_1, "","");
         Task t1 = mDatabase.child("users").child(user.username).setValue(user);
 
         //user = new User("user2", "0");
-        user = new User("user2", "","");
+        user = new User(USER_2, "","");
         Task t2 = mDatabase.child("users").child(user.username).setValue(user);
 
-        user = new User("user1sent", "","");
+        user = new User(USER_1+"sent", "","");
         Task t3 = mDatabase.child("users").child(user.username).setValue(user);
 
         //user = new User("user2", "0");
-        user = new User("user2sent", "","");
+        user = new User(USER_2+"sent", "","");
         Task t4 = mDatabase.child("users").child(user.username).setValue(user);
 
         if(!t1.isSuccessful() && !t2.isSuccessful()){
@@ -314,7 +340,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         Iterator<?> keys = jObject.keys();
         while( keys.hasNext() ){
             String key = (String)keys.next();
-            if (key.equals("user1")) {
+            if (key.equals(USER_1)) {
                 return jObject.getString(key);
             }
         }
@@ -327,22 +353,31 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Log.i("status:","INSIDEEEEE");
-                //User user = dataSnapshot.getValue(User.class);
+                String curUsername = myUser.username;
+//                curUsername = user.username;
                 //if (user == null) return;
                 //Log.i("All Data",user.score);
                 //Log.i("MYDATA",dataSnapshot.getValue().toString());
                 //Log.i("usersdata", String.valueOf(dataSnapshot.child("users").child("user1").child("score").getValue()));
 
-                String [] stickerIdList = getStringList(String.valueOf(dataSnapshot.child("users").child("user1" + addition).child("score").getValue()));
-                String [] userList = getStringList(String.valueOf(dataSnapshot.child("users").child("user1" + addition).child("senders").getValue()));
+                String [] stickerIdList = getStringList(String.valueOf(dataSnapshot.child("users")
+                        .child(curUsername + addition).child("score").getValue()));
+                String [] userList = getStringList(String.valueOf(dataSnapshot.child("users")
+                        .child(curUsername + addition).child("senders").getValue()));
+
+
+//                String [] stickerIdList = getStringList(String.valueOf(dataSnapshot.child("users").child("user1" + addition).child("score").getValue()));
+//                String [] userList = getStringList(String.valueOf(dataSnapshot.child("users").child("user1" + addition).child("senders").getValue()));
                 itemList = new ArrayList<>();
                 for (int idx = 0; idx < stickerIdList.length; idx++) {
                     if (stickerIdList[idx].equals("1")){
-                        MyItemCard itemCard = new MyItemCard(R.drawable.foo, "", userList[idx], false);
+                        MyItemCard itemCard = new MyItemCard(R.drawable.foo, "",
+                                userList[idx], false);
                         itemList.add(itemCard);
                         //continue;
                     } else if (stickerIdList[idx].equals("2")) {
-                        MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face, "", userList[idx], false);
+                        MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face, "",
+                                userList[idx], false);
                         itemList.add(itemCard);
                     }
                 }
@@ -363,7 +398,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     }
 
 
-    private void showScore(DataSnapshot dataSnapshot) {
+    private void drawEmotes(DataSnapshot dataSnapshot) {
         User user = dataSnapshot.getValue(User.class);
 
         String whoseInfo = player.isChecked() ? myUser.username : myUser.username+"sent";
@@ -377,11 +412,13 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
             itemList = new ArrayList<>();
             for (int idx = 0; idx < stickerIdList.length; idx++) {
                 if (stickerIdList[idx].equals("1")){
-                    MyItemCard itemCard = new MyItemCard(R.drawable.foo, "", userList[idx], false);
+                    MyItemCard itemCard = new MyItemCard(R.drawable.foo, "",
+                            userList[idx], false);
                     itemList.add(itemCard);
                     //continue;
                 } else if (stickerIdList[idx].equals("2")) {
-                    MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face, "", userList[idx], false);
+                    MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face,
+                            "", userList[idx], false);
                     itemList.add(itemCard);
                 }
             }
