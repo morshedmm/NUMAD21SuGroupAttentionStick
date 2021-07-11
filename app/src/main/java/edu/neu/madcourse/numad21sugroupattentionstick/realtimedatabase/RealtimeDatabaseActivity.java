@@ -151,7 +151,7 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
             if(!curName.equals(USER_1) && !curName.equals(USER_2)){
                 throw new IllegalArgumentException("Username must be "+ USER_1 + " or "+USER_2);
             }
-
+            showReadData(findViewById(android.R.id.content),player.isChecked() ? "" : "sent");
             //User myUser;
             myUser = new User(curName, "0", "");
             Log.i("Login", "Logged In as " + curName);
