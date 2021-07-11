@@ -7,6 +7,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,6 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import edu.neu.madcourse.numad21sugroupattentionstick.MyItemCard;
+import edu.neu.madcourse.numad21sugroupattentionstick.MyRviewAdapter;
 import edu.neu.madcourse.numad21sugroupattentionstick.utils.Utils;
 import edu.neu.madcourse.numad21sugroupattentionstick.R;
 
@@ -28,6 +31,13 @@ public class FCMActivity extends AppCompatActivity {
     private ArrayList<MyItemCard> stickerList = new ArrayList<>();
 
     // The user's sticker history is displayed as a scrollable list?
+    private RecyclerView recyclerView;
+    private MyRviewAdapter recyclerViewAdapter;
+    private RecyclerView.LayoutManager recyclerLayoutManager;
+
+    private static final String ITEM_COUNT = "ITEM_COUNT";
+    private static final String UNIQUE_KEY = "UNIQUE_KEY";
+
 
 
     private static final String TAG = "FCMActivity";
@@ -46,6 +56,10 @@ public class FCMActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fcm);
+
+        // Getting the initial item data for possible orientation changes
+        init(savedInstanceState);
+
 
         // CHECK NULL when you want to use
       //  SERVER_KEY = "key=" + Utils.getProperties(getApplicationContext()).getProperty("SERVER_KEY");
@@ -231,6 +245,9 @@ public class FCMActivity extends AppCompatActivity {
         // Add the new sticker to the sticker list
         stickerList.add(sticker);
 
+        // The adapter is notified that a new item was inserted
+        recyclerViewAdapter.notifyDataSetChanged();
+
 
         // Send sticker to another user of the app
 
@@ -245,4 +262,64 @@ public class FCMActivity extends AppCompatActivity {
 
 
     }
+
+
+    private void init(Bundle savedInstanceState) {
+
+        initialItem(savedInstanceState);
+        makeRecyclerView();
+    }
+
+    // Opening the activity
+    private void initialItem(Bundle savedInstanceState){
+
+        // If the activity HAS been opened before
+        if (savedInstanceState != null && savedInstanceState.containsKey(ITEM_COUNT)){
+
+            if (stickerList == null || stickerList.size() == 0){
+
+                // Get the info for the instance
+                for (int i = 0; i < savedInstanceState.getInt(ITEM_COUNT); i++){
+
+                    Integer imgId = savedInstanceState.getInt(UNIQUE_KEY + i
+                            + "Image");
+                    String itemName = savedInstanceState.getString(UNIQUE_KEY + i
+                            + "Name");
+                    String itemDesc = savedInstanceState.getString(UNIQUE_KEY + i
+                            + "Desc");
+                    boolean isChecked = savedInstanceState.getBoolean(UNIQUE_KEY + i
+                            + "Status");
+
+
+
+                    // Create and add the item from the InstanceState
+                    MyItemCard newSticker = new MyItemCard(imgId, itemName, itemDesc, isChecked);
+                    stickerList.add(newSticker);
+
+
+
+
+                }
+            }
+        }
+
+    }
+
+
+    // Making the Recycler View
+    private void makeRecyclerView(){
+
+        // Making a page of items for scrolling
+        recyclerLayoutManager = new LinearLayoutManager(this);
+
+        recyclerView = findViewById(R.id.recycler_view2);
+        recyclerView.setHasFixedSize(true);
+
+        recyclerViewAdapter = new MyRviewAdapter(stickerList);
+
+
+
+
+    }
+
 }
