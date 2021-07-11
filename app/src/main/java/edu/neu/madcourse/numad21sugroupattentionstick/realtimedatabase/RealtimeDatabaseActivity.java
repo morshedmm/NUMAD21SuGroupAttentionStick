@@ -168,14 +168,18 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     // Add Emote based on String
     public void addEmote(View view, String imageNum) {
 
-        EditText givenName = (EditText) findViewById(R.id.receiverusername_id);
-        String curName = givenName.getText().toString();
+        EditText receiverUsernameField = (EditText) findViewById(R.id.receiverusername_id);
+        String receiverUsername = receiverUsernameField.getText().toString();
+        if(receiverUsername == null || receiverUsername.equals("")){
+            Log.i("Adding Emote", "No receiver username entered!");
+            return;
+        }
 
         //User receiver = new User(curName, "0", "");
 
         //RealtimeDatabaseActivity.this.onAddScore(mDatabase, player.isChecked() ? "user1" : "user2",imageNum);
-        RealtimeDatabaseActivity.this.onAddScore(mDatabase, curName,imageNum,myUser.username);
-        RealtimeDatabaseActivity.this.onAddScore(mDatabase, myUser.username+"sent",imageNum,curName);
+        RealtimeDatabaseActivity.this.onAddScore(mDatabase, receiverUsername,imageNum,myUser.username);
+        RealtimeDatabaseActivity.this.onAddScore(mDatabase, myUser.username+"sent",imageNum,receiverUsername);
     }
 
     private void createRecyclerView() {
