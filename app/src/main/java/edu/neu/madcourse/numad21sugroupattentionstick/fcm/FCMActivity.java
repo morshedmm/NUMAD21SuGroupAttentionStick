@@ -197,7 +197,7 @@ public class FCMActivity extends AppCompatActivity {
             jNotification.put("body", " Message body from 'SEND MESSAGE TO CLIENT BUTTON'");
             jNotification.put("sound", "default");
             jNotification.put("badge", "1");
-            jNotification.put("image", R.drawable.unicorn_png_transparent12 );
+            jNotification.put("image", R.drawable.edited_foo);
             /*
             // We can add more details into the notification if we want.
             // We happen to be ignoring them for this demo.
