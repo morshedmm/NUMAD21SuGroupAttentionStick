@@ -12,30 +12,6 @@
     tools:context="edu.neu.madcourse.firebasedemo.MainActivity">
 
     <Button
-        android:id="@+id/notificationDemoButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:onClick="openSendNotificationActivity"
-        android:text="@string/start_notification_act" />
-
-    <Button
-        android:id="@+id/permDemoButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:onClick="openPermissionsActivity"
-        android:text="@string/start_permissions_act" />
-
-    <Button
-        android:id="@+id/subscribeButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:onClick="openFCMActivity"
-        android:text="@string/go_to_fcm_demo" />
-
-    <Button
         android:id="@+id/logTokenButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
