@@ -274,8 +274,8 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
             itemList.add(itemCard);
             //continue;
           } else if (stickerIdList[idx].equals("2")) {
-            MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face, "",
-                                                 userList[idx], false);
+            MyItemCard itemCard = new MyItemCard(R.drawable.thinking_face,
+                                                 userList[idx], msgTimeList[idx], false);
             itemList.add(itemCard);
           }
         }
