@@ -47,6 +47,8 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
   private TextView recipient;
   private TextView score_recipient;
   private RadioButton player;
+  private String imageNumToSend = "";
+  private String userNameToReceive = "";
 
   // Adding variable to hold my user name
   private User myUser = new User("", "", "");
@@ -189,6 +191,8 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
                      "Please log in before sending emotes!", Toast.LENGTH_SHORT).show();
       return;
     }
+    imageNumToSend = imageNum;
+    userNameToReceive = receiverUsername;
     RealtimeDatabaseActivity.this.onAddScore(mDatabase, receiverUsername, imageNum,
                                              myUser.username);
     RealtimeDatabaseActivity.this.onAddScore(mDatabase, myUser.username + "sent", imageNum,
@@ -223,12 +227,16 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
               }
 
               @Override
-              public void onComplete(DatabaseError databaseError, boolean b,
+              public void onComplete(DatabaseError databaseError, boolean comitted,
                                      DataSnapshot dataSnapshot) {
-                // Transaction completed
-                Log.d(TAG, "postTransaction:onComplete:" + databaseError);
-                Toast.makeText(getApplicationContext(), "DBError: " + databaseError,
-                               Toast.LENGTH_SHORT).show();
+                if (!comitted) {
+                  Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+                  Toast.makeText(getApplicationContext()
+                          , "DBError: " + databaseError, Toast.LENGTH_SHORT).show();
+                } else {
+                  Toast.makeText(getApplicationContext()
+                          , "Message Sent Successfully", Toast.LENGTH_SHORT).show();
+                }
               }
             });
   }
@@ -308,6 +316,23 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
         }
       }
       createRecyclerView();
+    }
+  }
+
+  public void sendDatabaseMessage(View view) {
+
+    System.out.println(userNameToReceive);
+    System.out.println(imageNumToSend);
+    if (myUser == null || myUser.username == null || myUser.username.equals("")) {
+      Log.i("Adding Emote", "Please log in before sending emotes!");
+      Toast.makeText(RealtimeDatabaseActivity.this,
+                     "Please log in before sending emotes!", Toast.LENGTH_SHORT).show();
+      return;
+    } else {
+      RealtimeDatabaseActivity.this.onAddScore(mDatabase, userNameToReceive, imageNumToSend,
+                                               myUser.username);
+      RealtimeDatabaseActivity.this.onAddScore(mDatabase, myUser.username + "sent",
+                                               imageNumToSend, userNameToReceive);
     }
   }
 
