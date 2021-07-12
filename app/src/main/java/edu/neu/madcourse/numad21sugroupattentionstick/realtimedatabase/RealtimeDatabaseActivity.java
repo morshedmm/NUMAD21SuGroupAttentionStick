@@ -300,6 +300,8 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     Log.i("INFO", whoseInfo);
 
     if (dataSnapshot.getKey().equalsIgnoreCase(whoseInfo)) {
+      Toast.makeText(RealtimeDatabaseActivity.this,
+                     "New message received!", Toast.LENGTH_SHORT).show();
       String[] stickerIdList = getStringList(String.valueOf(user.score));
       String[] userList = getStringList(String.valueOf(user.senders));
       itemList = new ArrayList<>();
