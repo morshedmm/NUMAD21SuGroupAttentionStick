@@ -55,7 +55,7 @@
                 android:layout_marginStart="70dp"
                 android:layout_marginTop="10dp"
                 android:layout_toEndOf="@+id/usernamelabel_id"
-                android:onClick="setUserName"
+                android:onClick="login"
                 android:text="LogIn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
