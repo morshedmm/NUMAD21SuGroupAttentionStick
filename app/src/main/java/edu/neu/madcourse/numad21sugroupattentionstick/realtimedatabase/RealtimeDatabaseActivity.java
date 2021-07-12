@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -300,8 +301,6 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
     Log.i("INFO", whoseInfo);
 
     if (dataSnapshot.getKey().equalsIgnoreCase(whoseInfo)) {
-      Toast.makeText(RealtimeDatabaseActivity.this,
-                     "New message received!", Toast.LENGTH_SHORT).show();
       String[] stickerIdList = getStringList(String.valueOf(user.score));
       String[] userList = getStringList(String.valueOf(user.senders));
       itemList = new ArrayList<>();
@@ -317,6 +316,13 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
           itemList.add(itemCard);
         }
       }
+      Toast toast = new Toast(getApplicationContext());
+      ImageView view = new ImageView(getApplicationContext());
+      view.setImageResource(stickerIdList[stickerIdList.length - 1].equals("1") ? R.drawable.foo :
+                                    R.drawable.thinking_face);
+      toast.setView(view);
+      toast.setDuration(Toast.LENGTH_SHORT);
+      toast.show();
       createRecyclerView();
     }
   }
