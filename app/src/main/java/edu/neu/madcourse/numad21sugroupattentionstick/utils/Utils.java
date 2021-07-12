@@ -32,7 +32,7 @@ public class Utils {
 
     public static String date() {
         Date dNow = new Date();
-        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm aaa");
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd H:mm aaa");
         return ft.format(dNow);
     }
 

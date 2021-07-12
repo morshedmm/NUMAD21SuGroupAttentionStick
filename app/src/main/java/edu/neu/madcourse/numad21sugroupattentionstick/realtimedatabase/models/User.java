@@ -12,6 +12,7 @@ public class User {
     public String score;
     public String datePlayed;
     public String senders;
+    public String scoreTimes;
 
 
     public User() {
@@ -23,6 +24,7 @@ public class User {
         this.score = score;
         this.datePlayed = Utils.date();
         this.senders = senders;
+        this.scoreTimes = "";
     }
 
     /*
